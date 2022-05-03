@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 """
-1. FIFO caching
+2. LIFO Caching
 """
 
 BaseCaching = __import__("base_caching").BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """
-    Class FIFOCache that inherits from BaseCaching and is a caching system
+    Class LIFOCache that inherits from BaseCaching and is a caching system
     """
 
     def __init__(self):
@@ -25,12 +25,14 @@ class FIFOCache(BaseCaching):
         if key and item:
             if key in self.cache_data:
                 self.cache_data[key] = item
+                self.Queue.remove(key)
+                self.Queue.insert(0, key)
             else:
                 if (len(self.cache_data) == self.MAX_ITEMS):
                     print("DISCARD: {}".format(self.Queue[0]))
                     del self.cache_data[self.Queue[0]]
                     del self.Queue[0]
-                self.Queue.append(key)
+                self.Queue.insert(0, key)
                 self.cache_data[key] = item
 
     def get(self, key):
