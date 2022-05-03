@@ -20,7 +20,7 @@ class MRUCache(BaseCaching):
 
     def get(self, key):
         """
-        Method that return the value of dict self.cahce_data linked to key
+        Method that return the value of dict self.cache_data linked to key
         """
         if key and key in self.cache_data:
             self.Queue.remove(key)
